@@ -1,7 +1,7 @@
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser,BaseUserManage,PermissionMixin
+from django.contrib.auth.models import AbstractBaseUser,BaseUserManager,PermissionsMixin
 
-class UserManager(BaseUserManage):
+class UserManager(BaseUserManager):
     def create_user(self,username,email,password=None):
 
         if username is None:
@@ -12,6 +12,7 @@ class UserManager(BaseUserManage):
         user=self.model(username=username,email=self.normalize_email(email))
         user.set_password(password)
         user.save()
+        return user
 
     def create_superuser(self,username,email,password=None):
 
@@ -25,12 +26,12 @@ class UserManager(BaseUserManage):
         return user
         
 
-class User(AbstractBaseUser,PermissionMixin):
+class User(AbstractBaseUser,PermissionsMixin):
     username=models.CharField(max_length=255,unique=True,db_index=True)
     email=models.EmailField(max_length=255,unique=True,db_index=True)
-    is_verified=models.Boolean(default=False)
-    is_active=models.Boolean(default=False)
-    is_staff=models.Boolean(default=False)
+    is_verified=models.BooleanField(default=False)
+    is_active=models.BooleanField(default=False)
+    is_staff=models.BooleanField(default=False)
     is_created=models.DateTimeField(auto_now_add=True)
     is_updated=models.DateTimeField(auto_now=True)
 
