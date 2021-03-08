@@ -1,0 +1,2 @@
+set EMAIL_HOST_USER=nkakaeric96@gmail.com
+set EMAIL_HOST_PASSWORD=Isheja1994
