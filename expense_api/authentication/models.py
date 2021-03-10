@@ -1,5 +1,7 @@
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser,BaseUserManager,PermissionsMixin
+from django.contrib.auth.models import (AbstractBaseUser,BaseUserManager
+,PermissionsMixin)
+from rest_framework_simplejwt.tokens import RefreshToken
 
 class UserManager(BaseUserManager):
     def create_user(self,username,email,password=None):
@@ -43,5 +45,9 @@ class User(AbstractBaseUser,PermissionsMixin):
     def __str__(self):
         return self.username
 
-    def token(self):
-        return ""
+    def tokens(self):
+        refresh=RefreshToken.for_user(self)
+        return {
+            'refresh':str(refresh),
+            'access':str(refresh.access_token)
+        }
