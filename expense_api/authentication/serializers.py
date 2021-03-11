@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from .models import User
-from django.contrib.auth import authenticate
+from django.contrib import auth
 from rest_framework.exceptions import AuthenticationFailed
 
 class RegisterSerializer(serializers.ModelSerializer):
@@ -46,18 +46,18 @@ class LoginSerializer(serializers.ModelSerializer):
         email=attrs.get('email','')
         password=attrs.get('password','')
 
-        user=authenticate(email=email,password=password)
-        print(user)
+        user=auth.authenticate(email=email,password=password)
         if not user:
             raise AuthenticationFailed('Invalid credentials, Please try again.')
         if not user.is_active:
             raise AuthenticationFailed('Account is not active, contact admin')
         if not user.is_verified:
             raise AuthenticationFailed('Account not verified yet.')
+            
         return {
             'email':user.email,
             'username':user.username,
             'tokens':user.tokens,
         }
-         return  super().validate(attrs)
+        return  super().validate(attrs)
 
