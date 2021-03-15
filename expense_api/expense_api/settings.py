@@ -46,8 +46,8 @@ SWAGGER_SETTINGS = {
     'SECURITY_DEFINITIONS': {
         'Bearer': {
             'type': 'apiKey',
-            'in': 'header',
-            'name': 'Authorization'
+            'name': 'Authorization',
+            'in': 'header'
         }
     },
 }
