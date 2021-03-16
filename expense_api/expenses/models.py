@@ -5,7 +5,7 @@ class Expense(models.Model):
     
     CATEGORY_OPTIONS=[
         ('ONLINE_SERVICES','ONLINE_SERVICES'),
-        ('TRAVLE','TRAVLE'),
+        ('TRAVEL','TRAVEL'),
         ('FOOD','FOOD'),
         ('RENT','RENT'),
         ('OTHERS','OTHERS'),
