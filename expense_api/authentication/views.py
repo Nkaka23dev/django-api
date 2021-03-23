@@ -3,6 +3,7 @@ from rest_framework import generics,status,views
 from .serializers import RegisterSerializer,EmailVerficatioSerializer,LoginSerializer
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
+from .renderers import UserRenderer
 from .models import User
 from .utils import Util
 from django.contrib.sites.shortcuts import get_current_site
@@ -15,6 +16,7 @@ from drf_yasg import openapi
 class RegisterView(generics.GenericAPIView):
     
     serializer_class=RegisterSerializer
+    renderer_classes=(UserRenderer,)
 
     def post(self,request):
         user=request.data
